@@ -29,13 +29,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'quantity' => 'required|integer',
             'price' => 'required|numeric',
             'category_id' => 'required|integer',
             'supplier_id' => 'required|integer',
         ]);
+        \App\Models\Product::create($validated);
+        return view('products.index');
     }
 
     /**
@@ -43,7 +45,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = \App\Models\Product::findOrFail($id);
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -51,7 +54,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = \App\Models\Product::findOrFail($id);
+        return view('products.edit', compact('product'));
     }
 
     /**
