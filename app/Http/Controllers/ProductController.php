@@ -63,7 +63,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'quantity' => 'required|integer',
+            'price' => 'required|numeric',
+            'category_id' => 'required|integer',
+            'supplier_id' => 'required|integer',
+        ]);
+
+        $product = \App\Models\Product::findOrFail($id);
+        $product->update($validated);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -71,6 +81,8 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = \App\Models\Product::findOrFail($id);
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }
