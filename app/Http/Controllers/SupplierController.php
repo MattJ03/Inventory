@@ -28,7 +28,13 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'contact_name' => 'required|string|max:255',
+            'email' => 'nullable|unique:suppliers|string:max:255|email',
+            'phone' => 'nullable|integer|digits_between:10,12',
+            'address' => 'nullable|text|max:255',
+        ]);
     }
 
     /**
