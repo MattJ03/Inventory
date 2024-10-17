@@ -63,7 +63,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'text|nullable|max:255',
+        ]);
+
+        $category = Category::findOrFail($id);
+        $category->update($validated);
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully');
     }
 
     /**
