@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Models\Supplier;
 
 class SupplierController extends Controller
 {
@@ -31,34 +32,48 @@ class SupplierController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'contact_name' => 'required|string|max:255',
-            'email' => 'nullable|unique:suppliers|string:max:255|email',
+            'email' => 'nullable|unique:suppliers|email|max:255',
             'phone' => 'nullable|integer|digits_between:10,12',
             'address' => 'nullable|text|max:255',
         ]);
+        \App\Models\Supplier::create($validated);
+        return view('supplier.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Supplier $supplier, string $id)
     {
-        //
+        $supplier = \App\Models\Supplier::findOrFail($id);
+        return view('supplier.show', compact('supplier'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Supplier $supplier, string $id)
     {
-        //
+        $supplier = \App\Models\Supplier::findOrFail($id);
+        return view('supplier.edit', compact('supplier'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Supplier $supplier)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'contact_name' => 'required|string|max:255',
+            'email' => 'nullable|unique:suppliers|email|max:255',
+            'phone' => 'nullable|integer|digits_between:10:12',
+            'address' => 'nullable|text|max:255',
+        ]);
+
+        $supplier->update($validated);
+        return view('supplier.show', compact('supplier'));
+
     }
 
     /**
@@ -66,6 +81,7 @@ class SupplierController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $supplier = \App\Models\Supplier::findOrFail($id);
+        $supplier->delete();
     }
 }
