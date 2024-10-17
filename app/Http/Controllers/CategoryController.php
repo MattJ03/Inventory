@@ -36,6 +36,7 @@ class CategoryController extends Controller
             'description'=>'text|nullable|max:255',
         ]);
         Category::create($validated);
+        return redirect()->route('categories.index')->with('success', 'Category created successfully');
     }
 
     /**
@@ -43,7 +44,9 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('categories.show', compact('category'));
+
     }
 
     /**
@@ -51,7 +54,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('categories.edit', compact('category'));
     }
 
     /**
