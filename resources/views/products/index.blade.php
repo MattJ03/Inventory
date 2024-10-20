@@ -1,36 +1,41 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>Product's List</h1>
+    <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-bold mb-6">Product's List</h1>
         <div class="mb-4">
-            <a href="{{ route('products.create') }}" class="btn btn-primary">Create New Product</a>
+            <a href="{{ route('products.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Create New Product</a>
         </div>
-        <table class="table">
-            <thead>
+        <table class="min-w-full bg-white border border-gray-200">
+            <thead class="bg-gray-100">
             <tr>
-            <th>Name</th>
-            <th>Category</th>
-                <th>Price</th>
-                <th>Actions</th>
+                <th class="px-4 py-2 border-b">Name</th>
+                <th class="px-4 py-2 border-b">Category</th>
+                <th class="px-4 py-2 border-b">Price</th>
+                <th class="px-4 py-2 border-b">Actions</th>
             </tr>
             </thead>
             <tbody id="product-list">
-            @foreach($prodcucts as $product)
-                <tr data-id="{{ $product->id }}">
-                    <td>$product->Name</td>
-                    <td>$product->Category</td>
-                    <td>$product->Price</td>
-                    <td>
-                        <a href="{{ route('products.edit') }}" class="btn btn-secondary">Edit Product</a>
-                        <a href ="{{ route('products.destroy') }}" class="btn btn-secondary">Delete Product</a>
+            @foreach($products as $product)
+                <tr data-id="{{ $product->id }}" class="hover:bg-gray-100">
+                    <td class="px-4 py-2 border-b">{{ $product->name }}</td>
+                    <td class="px-4 py-2 border-b">{{ $product->category }}</td>
+                    <td class="px-4 py-2 border-b">${{ $product->price }}</td>
+                    <td class="px-4 py-2 border-b">
+                        <a href="{{ route('products.edit', $product->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-2 rounded">Edit</a>
+                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
-                </tbody>
+            </tbody>
         </table>
     </div>
 @endsection
+
 
 @section('scripts')
     <script>
