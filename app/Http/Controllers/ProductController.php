@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = \App\Models\Product::all();
-        return view('products.index', compact('products'));
+        return view('products.index.blade.php', compact('products'));
     }
 
     /**
@@ -38,7 +38,7 @@ class ProductController extends Controller
             'supplier_id' => 'required|integer',
         ]);
         \App\Models\Product::create($validated);
-        return view('products.index');
+        return view('products.index.blade.php');
     }
 
     /**
@@ -74,7 +74,7 @@ class ProductController extends Controller
 
         $product = \App\Models\Product::findOrFail($id);
         $product->update($validated);
-        return redirect()->route('products.index');
+        return redirect()->route('products.index.blade.php');
     }
 
     /**
@@ -84,6 +84,6 @@ class ProductController extends Controller
     {
         $product = \App\Models\Product::findOrFail($id);
         $product->delete();
-        return redirect()->route('products.index');
+        return redirect()->route('products.index.blade.php');
     }
 }

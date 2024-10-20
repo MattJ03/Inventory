@@ -11,9 +11,9 @@
     <header class="py-6">
         <h1 class="text-2xl font-bold">Inventory Management app</h1>
         <nav>
-            <a href="{{ route('products.index') }}" class="mr-4">Products</a>
-            <a href="{{ route('categories.index') }}" class="mr-4">Categories</a>
-            <a href="{{ route('suppliers.index') }}" class="mr-4">Suppliers</a>
+            <a href="{{ route('products.index.blade.php') }}" class="mr-4">Products</a>
+            <a href="{{ route('categories.index.blade.php') }}" class="mr-4">Categories</a>
+            <a href="{{ route('suppliers.index.blade.php') }}" class="mr-4">Suppliers</a>
         </nav>
     </header>
 

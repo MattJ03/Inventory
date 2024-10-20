@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = \App\Models\Category::all();
-        return view('category.index', compact('categories'));
+        return view('category.index.blade.php', compact('categories'));
 
     }
 
@@ -36,7 +36,7 @@ class CategoryController extends Controller
             'description'=>'text|nullable|max:255',
         ]);
         Category::create($validated);
-        return redirect()->route('categories.index')->with('success', 'Category created successfully');
+        return redirect()->route('categories.index.blade.php')->with('success', 'Category created successfully');
     }
 
     /**
@@ -70,7 +70,7 @@ class CategoryController extends Controller
 
         $category = Category::findOrFail($id);
         $category->update($validated);
-        return redirect()->route('categories.index')->with('success', 'Category updated successfully');
+        return redirect()->route('categories.index.blade.php')->with('success', 'Category updated successfully');
     }
 
     /**
@@ -80,6 +80,6 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully');
+        return redirect()->route('categories.index.blade.php')->with('success', 'Category deleted successfully');
     }
 }

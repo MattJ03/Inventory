@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 // Product Routes
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index.blade.php');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
@@ -43,7 +43,7 @@ Route::put('/products/{id}', [ProductController::class, 'update'])->name('produc
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 // Category Routes
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index.blade.php');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
 Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
@@ -52,7 +52,7 @@ Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('cat
 Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 // Supplier Routes
-Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
+Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers.index.blade.php');
 Route::get('/suppliers/create', [SupplierController::class, 'create'])->name('suppliers.create');
 Route::post('/suppliers', [SupplierController::class, 'store'])->name('suppliers.store');
 Route::get('/suppliers/{id}', [SupplierController::class, 'show'])->name('suppliers.show');

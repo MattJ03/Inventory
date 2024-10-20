@@ -13,7 +13,7 @@ class SupplierController extends Controller
     public function index()
     {
         $suppliers = Supplier::all();
-        return view('supplier.index', compact('suppliers'));
+        return view('supplier.index.blade.php', compact('suppliers'));
     }
 
     /**
@@ -37,7 +37,7 @@ class SupplierController extends Controller
             'address' => 'nullable|text|max:255',
         ]);
          \App\Models\Supplier::create($validated);
-        return redirect()->route('supplier.index')->with('success Supplier created');
+        return redirect()->route('supplier.index.blade.php')->with('success Supplier created');
     }
 
     /**
@@ -72,7 +72,7 @@ class SupplierController extends Controller
         ]);
 
         $supplier->update($validated);
-        return redirect()->route('supplier.index')->with('success Supplier updated');
+        return redirect()->route('supplier.index.blade.php')->with('success Supplier updated');
 
     }
 
@@ -83,6 +83,6 @@ class SupplierController extends Controller
     {
        $supplier = \App\Models\Supplier::findOrFail($id);
        $supplier->delete();
-       return redirect()->route('supplier.index')->with('success Supplier deleted');
+       return redirect()->route('supplier.index.blade.php')->with('success Supplier deleted');
     }
 }
