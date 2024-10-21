@@ -17,10 +17,12 @@ class DatabaseSeeder extends Seeder
      $adminRole = Role::create(['name' => 'admin']);
      $userRole = Role::create(['name' => 'user']);
 
-     Permission::create(['name' => 'product.index']);
-     Permission::create(['name' => 'product.create']);
-     Permission::create(['name' => 'product.edit']);
-     Permission::create(['name' => 'product.destroy']);
+     Permission::create(['name' => 'create products']);
+     Permission::create(['name' => 'edit products']);
+     Permission::create(['name' => 'delete products']);
+     Permission::create(['name' => 'view products']);
 
+     $adminRole->givePermissionTo('create products', 'edit products', 'delete products', 'view products');
+     $userRole->givePermissionTo('view products');
     }
 }
